@@ -1,0 +1,10 @@
+ div {
+ 
+    width: 600px;
+    color: #fff;
+    border: 2px solid #fff;
+    margin: 0 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    
+ }
