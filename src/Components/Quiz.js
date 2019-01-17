@@ -18,33 +18,59 @@ const StyledH1 = styled.h1`
 
 class Quiz extends Component {
 
-
-    constructor() {
-        super();
-        console.log("constructor");
-
-        this.state = {
-            quiz: [
-                {
-                    answers: [
-                        { text: "Ответ 1" },
-                        { text: "Ответ 2" },
-                        { text: "Ответ 3" },
-                        { text: "Ответ 4" }
-                    ]
-                }
-            ]
-
-        }
+    onQuestionAnswered = () => {
+        this.setState({ ActiveQuestionIndex: this.state.ActiveQuestionIndex + 1});
     }
+
+    state = {
+        ActiveQuestionIndex: 0,
+        quiz: [
+            {
+                id: 1,
+                questionText: "Как тебя зовут?",
+                answers: [
+                    { text: "Саша", id: 1 },
+                    { text: "Миша", id: 2 },
+                    { text: "Карл", id: 3 },
+                    { text: "Галя", id: 4 }
+                ],
+                rightAnswerID: 3
+            },
+            {
+                id: 2,
+                questionText: "Что сдаем?",
+                answers: [
+                    { text: "Физика", id: 1 },
+                    { text: "Химия", id: 2 },
+                ],
+                rightAnswerID: 1
+            },
+            {
+                id: 2,
+                questionText: "Какого цвета учебник?",
+                answers: [
+                    { text: "Красный", id: 1 },
+                    { text: "Синий", id: 2 },
+                ],
+                rightAnswerID: 2
+            }
+        ]
+
+    }
+
 
 
     render() {
         return (
             <StyledQuiz>
                 <div>
-                    <StyledH1>Quiz</StyledH1>
-                    <Question answers={this.state.quiz[0].answers}/>
+                    <StyledH1>Анкета</StyledH1>
+                    <Question
+                        question={this.state.quiz[this.state.ActiveQuestionIndex]}
+                        index={this.state.ActiveQuestionIndex + 1}
+                        questionsCount={this.state.quiz.length} 
+                        onQuestionAnswered = {this.onQuestionAnswered}
+                        />
                 </div>
 
             </StyledQuiz>

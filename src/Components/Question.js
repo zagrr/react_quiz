@@ -17,34 +17,46 @@ const QuestionHeader = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-`;
+`
 
 
-const Question = props => (
+class Question extends React.Component {
 
-    <StyledQuestion>
-        <QuestionHeader>
-            <span>
-                <strong>2.</strong>&nbsp;
-                Как Дела?
-            </span>
-            <small>4 из 6</small>
-        </QuestionHeader>
+    onAnswerClickHandler = (answerID) => {
+        console.log("answerID", answerID);
 
-        <ul style={{ "list-style": "none", margin: 0, padding: 0}}>
-            {
-                props.answers.map((item, index) => <Answer answer={item} />)
-            }
-        </ul>
+        this.props.onQuestionAnswered();
+    }
+
+    render() {
+        return (
+            <StyledQuestion>
+                <QuestionHeader>
+                    <span>
+                        <strong>{this.props.index}.</strong>&nbsp;
+                {this.props.question.questionText}
+                    </span>
+                    <small>{this.props.index} из {this.props.questionsCount}</small>
+                </QuestionHeader>
+
+                <ul style={{ "listStyle": "none", margin: 0, padding: 0 }}>
+                    {
+                        this.props.question.answers.map((item, index) =>
+                            <Answer
+                                key={item.id}
+                                answer={item}
+                                onAnswerClick={this.onAnswerClickHandler}
+                            />)
+                    }
+                </ul>
+            </StyledQuestion>
 
 
-    </StyledQuestion>
-
-
-)
+        )
+    }
+}
 
 export default Question;
-
 
 
 
